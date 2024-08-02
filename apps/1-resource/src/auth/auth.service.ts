@@ -22,7 +22,10 @@ export class AuthService {
     });
     if (user && (await this.passwordService.compare(password, user.password))) {
       const { id, roles } = user;
-      const roleList = roles as string[];
+
+      const rolesJson = JSON.parse(roles);
+
+      const roleList = rolesJson as string[];
       return { id, username, roles: roleList };
     }
     return null;

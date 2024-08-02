@@ -47,7 +47,10 @@ export class UserControllerBase {
   })
   async createUser(@common.Body() data: UserCreateInput): Promise<User> {
     return await this.service.createUser({
-      data: data,
+      data: {
+        ...data,
+        roles: JSON.stringify(data.roles),
+      },
       select: {
         createdAt: true,
         email: true,

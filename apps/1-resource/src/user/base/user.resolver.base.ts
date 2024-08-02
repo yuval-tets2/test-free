@@ -86,7 +86,10 @@ export class UserResolverBase {
   async createUser(@graphql.Args() args: CreateUserArgs): Promise<User> {
     return await this.service.createUser({
       ...args,
-      data: args.data,
+      data: {
+        ...args.data,
+        roles: JSON.stringify(args.data.roles),
+      },
     });
   }
 
